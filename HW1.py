@@ -14,7 +14,7 @@ def area(r):
 A=area(20)
 
 #Display the diameter and area of a circle
-print("Area of a circle is ",A)
+pri("Area of a circle is ",A)
 print("Diameter of a circle is ",d)
 
 
