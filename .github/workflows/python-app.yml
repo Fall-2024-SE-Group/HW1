@@ -57,23 +57,11 @@ jobs:
     - name: Install dependencies
       run: |
         python3.13 -m pip install --upgrade pip
-        python3.13 -m pip install flake8 pytest
-        if [ -f requirements.txt ]; then python3.13 -m pip install -r requirements.txt; fi
+        pip install -r requirements.txt
 
-
-    - name: Lint with flake8
+    - name: Test with pytest
       run: |
-        python3.13 -m flake8 . \
-          --count \
-          --select=E999,F633,F722,F821,F822,F823 \
-          --show-source \
-          --statistics \
-          --max-line-length=127 \
-          --max-complexity=10 \
-          --ignore=E501,W503
-          python3.13 -m flake8 . \
+          pytest HW1_test.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
 
-        - name: Test with pytest
-          run: |
-            python3.13 -m pytest HW1_test.py
+
 
