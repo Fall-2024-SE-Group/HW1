@@ -60,10 +60,6 @@ jobs:
         python3.13 -m pip install flake8 pytest
         if [ -f requirements.txt ]; then python3.13 -m pip install -r requirements.txt; fi
 
-    - name: Lint with flake8
-      run: |
-        python3.13 -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        python3.13 -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Lint with flake8
       run: |
@@ -75,6 +71,8 @@ jobs:
           --max-line-length=127 \
           --max-complexity=10 \
           --ignore=E501,W503
+          python3.13 -m flake8 . \
+
         - name: Test with pytest
           run: |
             python3.13 -m pytest HW1_test.py
