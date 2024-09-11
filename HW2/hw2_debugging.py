@@ -1,36 +1,59 @@
+"""
+Module for merge sort and array randomization.
+"""
+
 import rand
 
-def mergeSort(arr):
-    if (len(arr) == 1):
-        return arr
-
-    half = len(arr)//2
-
-    return recombine(mergeSort(arr[:half]), mergeSort(arr[half:]))
-
-def recombine(leftArr, rightArr):
-    leftIndex = 0
-    rightIndex = 0
-    mergeArr = [None] * (len(leftArr) + len(rightArr))
-    while leftIndex < len(leftArr) and rightIndex < len(rightArr):
-        if leftArr[leftIndex] < rightArr[rightIndex]:
-            rightIndex += 1
-            mergeArr[leftIndex + rightIndex] = leftArr[leftIndex]
-        else:
-            leftIndex += 1
-            mergeArr[leftIndex + rightIndex] = rightArr[rightIndex]
-
-    for i in range(rightIndex, len(rightArr)):
-        mergeArr[leftIndex + rightIndex] = rightArr[i]
+def merge_sort(input_arr):
+    """
+    Sorts an array using the merge sort algorithm.
     
-    for i in range(leftIndex, len(leftArr)):
-        mergeArr[leftIndex + rightIndex] = leftArr[i]
+    Args:
+        input_arr (list): The list of elements to be sorted.
 
-    return mergeArr
+    Returns:
+        list: The sorted list.
+    """
+    if len(input_arr) <= 1:
+        return input_arr
 
+    half = len(input_arr) // 2
+
+    return recombine(merge_sort(input_arr[:half]), merge_sort(input_arr[half:]))
+
+
+def recombine(left_arr, right_arr):
+    """
+    Merges two sorted arrays into a single sorted array.
+    
+    Args:
+        left_arr (list): The left half of the sorted array.
+        right_arr (list): The right half of the sorted array.
+
+    Returns:
+        list: The merged and sorted array.
+    """
+    left_index, right_index = 0, 0
+    merge_arr = []  # Initialize as an empty list
+
+    while left_index < len(left_arr) and right_index < len(right_arr):
+        if left_arr[left_index] < right_arr[right_index]:
+            merge_arr.append(left_arr[left_index])
+            left_index += 1
+        else:
+            merge_arr.append(right_arr[right_index])
+            right_index += 1
+
+    # Append the remaining elements from both arrays
+    merge_arr.extend(left_arr[left_index:])
+    merge_arr.extend(right_arr[right_index:])
+
+    return merge_arr
+
+
+# Generate a random array using the rand module
 arr = rand.random_array([None] * 20)
-arr_out = mergeSort(arr)
+arr_out = merge_sort(arr)
 
 print(arr_out)
-
 
