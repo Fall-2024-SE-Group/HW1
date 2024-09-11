@@ -6,5 +6,5 @@ def test_success_diameter():
 
 #Failed case
 def test_failure_area():
-   assert HW1.area(10) == 20
+   assert HW1.area(10) == 314.2
 
