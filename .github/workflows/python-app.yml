@@ -62,40 +62,28 @@ jobs:
         python3.13 -m pip install pytest
         python3.13 -m pip install pylint
 
-
-    - name: Test with pytest
-      run: |
-        set -o pipefail
-        python3.13 -m pytest "HW1/HW1_test.py" || true
-        python3.13 -m pytest "HW2/tests_merge_sort.py" ||true
-        echo "Tests completed"
-
     - name: Run autopep8
       run: |
         cd HW2
         autopep8 --in-place --aggressive --aggressive hw2_debugging.py rand.py ||true
-        echo "Autopep8 Formatting completed" > autopep8.result.txt
+        echo "Autopep8 Formatting completed"
 
     - name: Run pylint
       run: |
         cd HW2
         pylint hw2_debugging.py rand.py ||true
-        echo "Pylint analysis completed" > pylint_result.txt
-
+        echo "Pylint analysis completed"
     - name: Run radon (Cyclomatic Complexity)
       run: |
         cd HW2
         radon cc hw2_debugging.py rand.py || true
-        echo "Radon analysis completed" > radon_result.txt
+        echo "Radon analysis completed" 
 
     
     
-    - name: Upload lint results
-      uses: actions/upload-artifact@v3
-      with:
-        name: lint-results
-        path: |
-          autopep8_result.txt
-          pylint_result.txt
-          radon_result.txt
+    - name: Test with pytest
+      run: |
+          set -o pipefail
+          python3.13 -m pytest "HW2/tests_merge_sort.py"
+          python3.13 -m pytest "HW1/HW1_test.py"
 
