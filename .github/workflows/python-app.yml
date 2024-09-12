@@ -72,16 +72,19 @@ jobs:
 
     - name: Run autopep8
       run: |
+        cd HW2
         autopep8 --in-place --aggressive --aggressive hw2_debugging.py rand.py ||true
         echo "Autopep8 Formatting completed" > autopep8.result.txt
 
     - name: Run pylint
       run: |
+        cd HW2
         pylint hw2_debugging.py rand.py ||true
         echo "Pylint analysis completed" > pylint_result.txt
 
     - name: Run radon (Cyclomatic Complexity)
       run: |
+        cd HW2
         radon cc hw2_debugging.py rand.py || true
         echo "Radon analysis completed" > radon_result.txt
 
