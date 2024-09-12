@@ -5,3 +5,5 @@
 [![pylint](https://img.shields.io/badge/Pylint-blue)](https://github.com/Fall-2024-SE-Group/HW1/actions)
 [![radon](https://img.shields.io/badge/Radon-yellow)](https://github.com/Fall-2024-SE-Group/HW1/actions)
 
+
+Please note that the Python application badge is failing due to the failure test case in HW1.
