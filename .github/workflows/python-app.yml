@@ -57,7 +57,10 @@ jobs:
     - name: Install dependencies
       run: |
         python3.13 -m pip install --upgrade pip
-        python3.13 install -r requirements.txt
+        python3.13 -m pip install autopep8
+        python3.13 -m pip install radon
+        python3.13 -m pip install pytest
+        python3.13 -m pip install pylint
 
 
     - name: Test with pytest
