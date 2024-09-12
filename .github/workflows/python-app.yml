@@ -64,5 +64,14 @@ jobs:
         python3.13 -m pytest "HW1/HW1_test.py"
         python3.13 -m pytest "HW2/tests_merge_sort.py"
 
+    - name: Run autopep8
+      run: autopep8 --in-place --aggressive --aggressive hw2_debugging.py rand.py
+
+    - name: Run pylint
+      run: pylint hw2_debugging.py rand.py
+
+    - name: Run radon (Cyclomatic Complexity)
+      run: radon cc hw2_debugging.py rand.py
+
 
 
