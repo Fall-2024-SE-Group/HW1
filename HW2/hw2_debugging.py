@@ -1,29 +1,30 @@
-
 """
 Module for merge sort and array randomization.
 """
 
 import rand
 
-def merge_sort(input_arr):
+def merge_sort(arr):
     """
     Sorts an array using the merge sort algorithm.
     
     Args:
-        input_arr (list): The list of elements to be sorted.
+        arr (list): The list of elements to be sorted.
 
     Returns:
         list: The sorted list.
     """
-    if len(input_arr) <= 1:
-        return input_arr
+    if len(arr) <= 1:
+        return arr
 
-    half = len(input_arr) // 2
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
 
-    return recombine(merge_sort(input_arr[:half]), merge_sort(input_arr[half:]))
+    return merge(left, right)
 
 
-def recombine(left_arr, right_arr):
+def merge(left_arr, right_arr):
     """
     Merges two sorted arrays into a single sorted array.
     
@@ -34,27 +35,32 @@ def recombine(left_arr, right_arr):
     Returns:
         list: The merged and sorted array.
     """
+    merged = []
     left_index, right_index = 0, 0
-    merge_arr = []  # Initialize as an empty list
 
     while left_index < len(left_arr) and right_index < len(right_arr):
         if left_arr[left_index] < right_arr[right_index]:
-            merge_arr.append(left_arr[left_index])
+            merged.append(left_arr[left_index])
             left_index += 1
         else:
-            merge_arr.append(right_arr[right_index])
+            merged.append(right_arr[right_index])
             right_index += 1
 
     # Append the remaining elements from both arrays
-    merge_arr.extend(left_arr[left_index:])
-    merge_arr.extend(right_arr[right_index:])
+    merged.extend(left_arr[left_index:])
+    merged.extend(right_arr[right_index:])
 
-    return merge_arr
+    return merged
 
 
-# Generate a random array using the rand module
-arr = rand.random_array([None] * 20)
-arr_out = merge_sort(arr)
+def main():
+    """
+    Generates a random array, sorts it, and outputs the sorted array.
+    """
+    rand_arr = rand.random_array([None] * 20)
+    sorted_arr = merge_sort(rand_arr)
 
-print(arr_out)
+    print("Sorted array:", sorted_arr)
 
+if __name__ == "__main__":
+    main()

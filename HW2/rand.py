@@ -1,14 +1,7 @@
-#for linux system
-#import subprocess
-#def random_array(arr):
-    #shuffled_num = None
-    #for i in range(len(arr)):
-     #   shuffled_num = subprocess.run(
-      #      ["shuf", "-i1-20", "-n1"], capture_output=True)
-       # arr[i] = int(shuffled_num.stdout)
-    #return arr
-
-#for platform independent
+"""
+This module provides a function to fill an array with random integers
+between 1 and 20.
+"""
 import random
 
 def random_array(arr):
@@ -21,6 +14,6 @@ def random_array(arr):
     Returns:
         list: The array filled with random integers.
     """
-    for i in range(len(arr)):
+    for i, _ in enumerate(arr):
         arr[i] = random.randint(1, 20)
     return arr
