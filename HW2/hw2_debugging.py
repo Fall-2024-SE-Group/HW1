@@ -1,3 +1,4 @@
+
 """
 Module for merge sort and array randomization.
 """
