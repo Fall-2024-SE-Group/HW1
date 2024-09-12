@@ -67,16 +67,19 @@ jobs:
         echo "Tests completed"
 
     - name: Run autopep8
-      run: autopep8 --in-place --aggressive --aggressive hw2_debugging.py rand.py ||true
-      echo "Autopep8 Formatting completed" > autopep8.result.txt
+      run: |
+        autopep8 --in-place --aggressive --aggressive hw2_debugging.py rand.py ||true
+        echo "Autopep8 Formatting completed" > autopep8.result.txt
 
     - name: Run pylint
-      run: pylint hw2_debugging.py rand.py ||true
-      echo "Pylint analysis completed" > pylint_result.txt
+      run: |
+        pylint hw2_debugging.py rand.py ||true
+        echo "Pylint analysis completed" > pylint_result.txt
 
     - name: Run radon (Cyclomatic Complexity)
-      run: radon cc hw2_debugging.py rand.py || true
-      echo "Radon analysis completed" > radon_result.txt
+      run: |
+        radon cc hw2_debugging.py rand.py || true
+        echo "Radon analysis completed" > radon_result.txt
 
     
     
