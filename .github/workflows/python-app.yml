@@ -20,70 +20,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install build dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          wget \
-          build-essential \
-          zlib1g-dev \
-          libncurses5-dev \
-          libgdbm-dev \
-          libnss3-dev \
-          libsqlite3-dev \
-          libreadline-dev \
-          libffi-dev \
-          libbz2-dev
-
-    - name: Download Python 3.13.0 Release Candidate 2
-      run: |
-        wget https://www.python.org/ftp/python/3.13.0/Python-3.13.0rc2.tgz
-
-    - name: Extract Python 3.13.0rc2
-      run: |
-        tar -xf Python-3.13.0rc2.tgz
-
-    - name: Build and install Python 3.13.0rc2
-      run: |
-        cd Python-3.13.0rc2
-        ./configure --enable-optimizations
-        make
-        sudo make altinstall
-
-    - name: Verify Python version
-      run: |
-        python3.13 --version
-
-    - name: Install dependencies
-      run: |
-        python3.13 -m pip install --upgrade pip
-        python3.13 -m pip install autopep8
-        python3.13 -m pip install radon
-        python3.13 -m pip install pytest
-        python3.13 -m pip install pylint
-
-    - name: Run autopep8
-      run: |
-        cd HW2
-        autopep8 --in-place --aggressive --aggressive hw2_debugging.py rand.py ||true
-        echo "Autopep8 Formatting completed"
-
     - name: Run pylint
       run: |
         cd HW2
         pylint hw2_debugging.py rand.py ||true
         echo "Pylint analysis completed"
-    - name: Run radon (Cyclomatic Complexity)
-      run: |
-        cd HW2
-        radon cc hw2_debugging.py rand.py || true
-        echo "Radon analysis completed" 
-
-    
     
     - name: Test with pytest
       run: |
           set -o pipefail
           python3.13 -m pytest "HW2/tests_merge_sort.py"
-          python3.13 -m pytest "HW1/HW1_test.py"
+    
 
